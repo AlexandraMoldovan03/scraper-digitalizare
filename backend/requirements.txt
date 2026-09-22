@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+sqlmodel
+sqlalchemy
+psycopg2-binary
+pydantic-settings
+python-dotenv
+alembic
+httpx
+beautifulsoup4
+playwright
+passlib[bcrypt]
+python-jose[cryptography]
+slowapi
+python-multipart
+apscheduler>=3.10,<4
+pwdlib[argon2]

@@ -1,0 +1,25 @@
+[
+  {
+    "@id": "https://www.imobiliare.ro/#/schema/Product/item-666666666",
+    "name": "Teren intravilan, Aiud",
+    "description": "Teren intravilan 500mp in Aiud.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Aiud",
+      "addressRegion": "Alba"
+    },
+    "offers": {
+      "@type": "Offer",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "price": 30000,
+        "priceCurrency": "EUR"
+      }
+    }
+  },
+  {
+    "@type": "Person",
+    "@id": "https://www.imobiliare.ro/#/schema/Person/xyz",
+    "name": "Test Person"
+  }
+]

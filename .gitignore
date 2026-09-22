@@ -1,0 +1,39 @@
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Node
+node_modules/
+.next/
+
+# IDE / macOS
+.vscode/
+.idea/
+.DS_Store
+
+# Logs and generated files
+*.log
+coverage/
+dist/
+build/
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.pyc
+node_modules/
+.next/
+dist/
+.DS_Store
+tmp/

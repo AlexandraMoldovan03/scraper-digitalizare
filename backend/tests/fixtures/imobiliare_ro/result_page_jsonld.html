@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8"/>
+  <title>Apartamente de vanzare - Judetul Alba</title>
+</head>
+<body>
+  <!-- Navigatie cu link pagina 2 pentru testul de paginare -->
+  <nav>
+    <a href="/vanzare-apartamente/judet-alba?pagina=2">2</a>
+    <a href="/vanzare-apartamente/judet-alba?pagina=3">3</a>
+  </nav>
+
+  <!-- Linkuri reale de listing in HTML -->
+  <a href="/vanzare-apartamente/alba-iulia/apartament-2-camere-centru-item-111111111">Apartament 2 camere Alba Iulia</a>
+  <a href="/vanzare-apartamente/blaj/apartament-3-camere-item-222222222">Apartament 3 camere Blaj</a>
+  <a href="/vanzare-case-si-vile/sebes/casa-item-333333333">Casa Sebes</a>
+
+  <!-- Duplicate URL pentru test deduplicare (acelasi item-111111111) -->
+  <a href="/vanzare-apartamente/alba-iulia/apartament-2-camere-centru-item-111111111?ref=list">Dup</a>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://www.imobiliare.ro/vanzare-apartamente/judet-alba",
+        "dateModified": "2026-08-04T10:00:00.000000Z"
+      },
+      {
+        "@type": "Person",
+        "@id": "https://www.imobiliare.ro/#/schema/Person/agent-999",
+        "name": "Ion Popescu"
+      },
+      {
+        "@id": "https://www.imobiliare.ro/#/schema/Product/item-111111111",
+        "name": "Apartament 2 camere, 55mp, Alba Iulia",
+        "description": "Apartament cu 2 camere in zona centrala, etaj 3, decomandat.",
+        "offers": {
+          "@type": "Offer",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "price": 75000,
+            "priceCurrency": "EUR"
+          }
+        }
+      },
+      {
+        "@id": "https://www.imobiliare.ro/#/schema/Product/item-222222222",
+        "name": "Apartament 3 camere, 80mp, Blaj",
+        "description": "Apartament spatios cu 3 camere in Blaj, bloc nou.",
+        "offers": {
+          "@type": "Offer",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "price": 95000,
+            "priceCurrency": "EUR"
+          }
+        }
+      },
+      {
+        "@id": "https://www.imobiliare.ro/#/schema/Product/item-333333333",
+        "name": "Casa 5 camere, Sebes",
+        "description": "Casa cu teren in Sebes, zona linistita.",
+        "offers": {
+          "@type": "Offer",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "price": 300000,
+            "priceCurrency": "RON"
+          }
+        }
+      }
+    ]
+  }
+  </script>
+</body>
+</html>

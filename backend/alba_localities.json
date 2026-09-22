@@ -1,0 +1,2666 @@
+[
+ {
+  "name": "Abrud",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Abrud-Sat",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Achimețești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Acmariu",
+  "locality_type": "village"
+ },
+ {
+  "name": "Aiud",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Aiudul de Sus",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Alba Iulia",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Albac",
+  "locality_type": "village"
+ },
+ {
+  "name": "Alecuș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Almașu Mare",
+  "locality_type": "village"
+ },
+ {
+  "name": "Almașu de Mijloc",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ampoița",
+  "locality_type": "village"
+ },
+ {
+  "name": "Anghelești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Arieșeni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Aronești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Arți",
+  "locality_type": "village"
+ },
+ {
+  "name": "Asinip",
+  "locality_type": "village"
+ },
+ {
+  "name": "Avram Iancu",
+  "locality_type": "village"
+ },
+ {
+  "name": "Avramești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Baba",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bacainți",
+  "locality_type": "village"
+ },
+ {
+  "name": "Badai",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bagau",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bai",
+  "locality_type": "village"
+ },
+ {
+  "name": "Baia de Arieș",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Balcaciu",
+  "locality_type": "village"
+ },
+ {
+  "name": "Balești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Balești-Catun",
+  "locality_type": "village"
+ },
+ {
+  "name": "Balmoșești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Balomiru de Cîmp",
+  "locality_type": "village"
+ },
+ {
+  "name": "Barabanț",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Baraști",
+  "locality_type": "village"
+ },
+ {
+  "name": "Barbești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bazești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Beldiu",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Benic",
+  "locality_type": "village"
+ },
+ {
+  "name": "Berghin",
+  "locality_type": "village"
+ },
+ {
+  "name": "Beța",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bidigești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Biharia",
+  "locality_type": "village"
+ },
+ {
+  "name": "Biia",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bilanești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bisericani",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bistra",
+  "locality_type": "village"
+ },
+ {
+  "name": "Blaj",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Blandiana",
+  "locality_type": "village"
+ },
+ {
+  "name": "Blidești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bobarești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bocești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bocșitura",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Bodești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bodrești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bogdanești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Boglești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Boldești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bolovanești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Boncești",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Bordeștii Poieni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Borlești",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Botești",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Boz",
+  "locality_type": "village"
+ },
+ {
+  "name": "Boțani",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bradeana",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bradet",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bradești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Brazești",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Bubești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bucerdea Grânoasa",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bucerdea Vînoasa",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bucium",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bucium-Sat",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bucuru",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Budaiești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Budeni",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Bulbuc",
+  "locality_type": "village"
+ },
+ {
+  "name": "Buninginea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bunta",
+  "locality_type": "village"
+ },
+ {
+  "name": "Burzești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Burzonești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Butești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bîrdești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bîrlești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bîrlești-Catun",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bîrsana",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bîrzan",
+  "locality_type": "village"
+ },
+ {
+  "name": "Bîrzogani",
+  "locality_type": "village"
+ },
+ {
+  "name": "Calene",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Calugarești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Captalan",
+  "locality_type": "village"
+ },
+ {
+  "name": "Capu Dealului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Capud",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Capîlna",
+  "locality_type": "village"
+ },
+ {
+  "name": "Capîlna de Jos",
+  "locality_type": "village"
+ },
+ {
+  "name": "Carpen",
+  "locality_type": "village"
+ },
+ {
+  "name": "Carpenii de Sus",
+  "locality_type": "village"
+ },
+ {
+  "name": "Carpiniș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Casa de Piatra",
+  "locality_type": "village"
+ },
+ {
+  "name": "Casoaia",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cenade",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cerbu",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cergau Mare",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cergau Mic",
+  "locality_type": "village"
+ },
+ {
+  "name": "Certege",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Ceru-Bacainți",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cetatea de Balta",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cetea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cheia",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cheile Cibului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cheleteni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cib",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cicau",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cicîrd",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cioara de Sus",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Ciocașu",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cionești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cistei",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cisteiu de Mureș",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Ciuculești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ciugud",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ciugudu de Jos",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ciugudu de Sus",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ciuguzel",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ciuldești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ciumbrud",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Ciuruleasa",
+  "locality_type": "village"
+ },
+ {
+  "name": "Coasta Henții",
+  "locality_type": "village"
+ },
+ {
+  "name": "Coasta Vîscului",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Cobleș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cocești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cocoșești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cojocani",
+  "locality_type": "village"
+ },
+ {
+  "name": "Coleșeni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Colibi",
+  "locality_type": "village"
+ },
+ {
+  "name": "Colțești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Copand",
+  "locality_type": "village"
+ },
+ {
+  "name": "Corna",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cornu",
+  "locality_type": "village"
+ },
+ {
+  "name": "Coroiești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Corțești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Costești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cotoraști",
+  "locality_type": "village"
+ },
+ {
+  "name": "Coșlariu",
+  "locality_type": "village"
+ },
+ {
+  "name": "Coșlariu Nou",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Craciunelu de Jos",
+  "locality_type": "village"
+ },
+ {
+  "name": "Craciunelu de Sus",
+  "locality_type": "village"
+ },
+ {
+  "name": "Craiva",
+  "locality_type": "village"
+ },
+ {
+  "name": "Crețești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cricau",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cristești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Crișeni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cucuta",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cugir",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Culdești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cunța",
+  "locality_type": "village"
+ },
+ {
+  "name": "Curaturi",
+  "locality_type": "village"
+ },
+ {
+  "name": "Curmatura",
+  "locality_type": "village"
+ },
+ {
+  "name": "Curpeni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cut",
+  "locality_type": "village"
+ },
+ {
+  "name": "Câlnic",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cîmpeni",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Cîmpu Goblii",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cîndești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cîraști",
+  "locality_type": "village"
+ },
+ {
+  "name": "Cîrțulești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Daia Româna",
+  "locality_type": "village"
+ },
+ {
+  "name": "Danduț",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Daroaia",
+  "locality_type": "village"
+ },
+ {
+  "name": "Deal",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dealu Bajului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dealu Bistrii",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Dealu Capsei",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Dealu Caselor",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dealu Crișului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dealu Doștatului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dealu Ferului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dealu Frumos",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dealu Geoagiului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dealu Goiești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dealu Lamașoi",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dealu Muntelui",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dealu Ordîncușii",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dealu Roatei",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Decea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Deleni-Obîrșie",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Deoncești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Deve",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dilimani",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dobra",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dobrești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dobrot",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Dogarești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dolești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Doptau",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dos",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dosu Luncii",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dosu Vasești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Doștat",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dragoiești-Lunca",
+  "locality_type": "village"
+ },
+ {
+  "name": "Drașov",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dric",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Drîmbar",
+  "locality_type": "village"
+ },
+ {
+  "name": "Duduieni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dumacești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dumbrava",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Dumbravița",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dumești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dumitra",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dupa Deal",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dupa Pleșe",
+  "locality_type": "village"
+ },
+ {
+  "name": "Duraști",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dîmbureni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Dîrlești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Faget",
+  "locality_type": "village"
+ },
+ {
+  "name": "Fagetu de Jos",
+  "locality_type": "village"
+ },
+ {
+  "name": "Fagetu de Sus",
+  "locality_type": "village"
+ },
+ {
+  "name": "Farau",
+  "locality_type": "village"
+ },
+ {
+  "name": "Fața",
+  "locality_type": "village"
+ },
+ {
+  "name": "Fața Abrudului",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Fața Cristesei",
+  "locality_type": "village"
+ },
+ {
+  "name": "Fața Lapușului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Fața Pietrii",
+  "locality_type": "village"
+ },
+ {
+  "name": "Fața-Lazești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Feisa",
+  "locality_type": "village"
+ },
+ {
+  "name": "Feneș",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Ferești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Fericet",
+  "locality_type": "village"
+ },
+ {
+  "name": "Fețeni",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Ficarești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Flitești",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Florești",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Furduiești",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Fîntânele",
+  "locality_type": "village"
+ },
+ {
+  "name": "Gabud",
+  "locality_type": "village"
+ },
+ {
+  "name": "Galați",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Galbena",
+  "locality_type": "village"
+ },
+ {
+  "name": "Galda de Jos",
+  "locality_type": "village"
+ },
+ {
+  "name": "Galda de Sus",
+  "locality_type": "village"
+ },
+ {
+  "name": "Galtiu",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ganești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Geamana",
+  "locality_type": "village"
+ },
+ {
+  "name": "Geoagiu de Sus",
+  "locality_type": "village"
+ },
+ {
+  "name": "Geogel",
+  "locality_type": "village"
+ },
+ {
+  "name": "Geomal",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ghedulești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ghețari",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ghioncani",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ghirbom",
+  "locality_type": "village"
+ },
+ {
+  "name": "Giurgiuț",
+  "locality_type": "village"
+ },
+ {
+  "name": "Gligorești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Glod",
+  "locality_type": "village"
+ },
+ {
+  "name": "Glogoveț",
+  "locality_type": "village"
+ },
+ {
+  "name": "Goașele",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Goiești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Gojeiești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Gorgan",
+  "locality_type": "village"
+ },
+ {
+  "name": "Groși",
+  "locality_type": "village"
+ },
+ {
+  "name": "Gura Arieșului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Gura Cornei",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Gura Cuțului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Gura Izbitei",
+  "locality_type": "village"
+ },
+ {
+  "name": "Gura Roșiei",
+  "locality_type": "village"
+ },
+ {
+  "name": "Gura Sohodol",
+  "locality_type": "village"
+ },
+ {
+  "name": "Gîmbaș",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Gîrbova",
+  "locality_type": "village"
+ },
+ {
+  "name": "Gîrbova de Jos",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Gîrbova de Sus",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Gîrbovița",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Gîrda Seaca",
+  "locality_type": "village"
+ },
+ {
+  "name": "Gîrda de Sus",
+  "locality_type": "village"
+ },
+ {
+  "name": "Gîrda-Barbulești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Gîrde",
+  "locality_type": "village"
+ },
+ {
+  "name": "Hadarau",
+  "locality_type": "village"
+ },
+ {
+  "name": "Haiducești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Hanașești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Hapria",
+  "locality_type": "village"
+ },
+ {
+  "name": "Haraști",
+  "locality_type": "village"
+ },
+ {
+  "name": "Hațegana",
+  "locality_type": "village"
+ },
+ {
+  "name": "Helerești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Helești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Henig",
+  "locality_type": "village"
+ },
+ {
+  "name": "Heria",
+  "locality_type": "village"
+ },
+ {
+  "name": "Hoanca",
+  "locality_type": "village"
+ },
+ {
+  "name": "Hodișești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Hodobana",
+  "locality_type": "village"
+ },
+ {
+  "name": "Holobani",
+  "locality_type": "village"
+ },
+ {
+  "name": "Hopîrta",
+  "locality_type": "village"
+ },
+ {
+  "name": "Horea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Hudricești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Huzarești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Iacobești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ibru",
+  "locality_type": "village"
+ },
+ {
+  "name": "Iclod",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ighiel",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ighiu",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ignațești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Iliești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Incești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Inoc",
+  "locality_type": "village"
+ },
+ {
+  "name": "Inuri",
+  "locality_type": "village"
+ },
+ {
+  "name": "Isca",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ivaniș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Izbicioara",
+  "locality_type": "village"
+ },
+ {
+  "name": "Izbita",
+  "locality_type": "village"
+ },
+ {
+  "name": "Izlaz",
+  "locality_type": "village"
+ },
+ {
+  "name": "Izvoarele",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Izvoru Ampoiului",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Jeflești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Jidoștina",
+  "locality_type": "village"
+ },
+ {
+  "name": "Jidvei",
+  "locality_type": "village"
+ },
+ {
+  "name": "Jojei",
+  "locality_type": "village"
+ },
+ {
+  "name": "Joldișești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Jurcuiești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lancram",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Laz",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lazești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lazuri",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lehești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Leorinț",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lespezea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Limba",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lipaia",
+  "locality_type": "village"
+ },
+ {
+  "name": "Livezile",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lodroman",
+  "locality_type": "village"
+ },
+ {
+  "name": "Loman",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lopadea Noua",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lopadea Veche",
+  "locality_type": "village"
+ },
+ {
+  "name": "Luminești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lunca",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lunca Ampoiței",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lunca Bisericii",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lunca Goiești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lunca Larga",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lunca Merilor",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lunca Meteșului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lunca Mureșului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lunca Tîrnavei",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lunca Vesești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lunca de Jos",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lupaiești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lupu",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lupulești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lupșa",
+  "locality_type": "village"
+ },
+ {
+  "name": "Lupșeni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Macarești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Maghierat",
+  "locality_type": "village"
+ },
+ {
+  "name": "Magina",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Magura",
+  "locality_type": "village"
+ },
+ {
+  "name": "Mahaceni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Mamaligani",
+  "locality_type": "village"
+ },
+ {
+  "name": "Manarade",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Manastire",
+  "locality_type": "village"
+ },
+ {
+  "name": "Mancești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Margaia",
+  "locality_type": "village"
+ },
+ {
+  "name": "Margineni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Marinești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Martești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Martinie",
+  "locality_type": "village"
+ },
+ {
+  "name": "Matacina",
+  "locality_type": "village"
+ },
+ {
+  "name": "Matișești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Maței",
+  "locality_type": "village"
+ },
+ {
+  "name": "Medrești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Medveș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Mereteu",
+  "locality_type": "village"
+ },
+ {
+  "name": "Mesentea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Meteș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Meșcreac",
+  "locality_type": "village"
+ },
+ {
+  "name": "Micești",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Micoșlaca",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Mihaiești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Mihalț",
+  "locality_type": "village"
+ },
+ {
+  "name": "Mihoești",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Miraslau",
+  "locality_type": "village"
+ },
+ {
+  "name": "Modolești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Mogoș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Morarești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Morcanești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Motoraști",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Mugești",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Muncelu",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Munești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Muntari",
+  "locality_type": "village"
+ },
+ {
+  "name": "Mununa",
+  "locality_type": "village"
+ },
+ {
+  "name": "Mușca",
+  "locality_type": "village"
+ },
+ {
+  "name": "Nadaștia",
+  "locality_type": "village"
+ },
+ {
+  "name": "Namaș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Napaiești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Necrilești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Necșești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Negești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Negrești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Nelegești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Nemeși",
+  "locality_type": "village"
+ },
+ {
+  "name": "Nicorești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Niculești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Novacești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Noșlac",
+  "locality_type": "village"
+ },
+ {
+  "name": "Oarda",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Obreja",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ocna Mureș",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Ocnișoara",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ocoale",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ocoliș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Odverem",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ohaba",
+  "locality_type": "village"
+ },
+ {
+  "name": "Oidești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Oiejdea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Olteni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Oncești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Oraști",
+  "locality_type": "village"
+ },
+ {
+  "name": "Orgești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ormeniș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Padure",
+  "locality_type": "village"
+ },
+ {
+  "name": "Padurea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Pagida",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Panade",
+  "locality_type": "village"
+ },
+ {
+  "name": "Pantești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Patrahaițești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Patrușești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Patruțești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Patrîngeni",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Paștești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Peleș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Perjești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Peste Valea Bistrii",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Petelei",
+  "locality_type": "village"
+ },
+ {
+  "name": "Petreasa",
+  "locality_type": "village"
+ },
+ {
+  "name": "Petreni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Petrești",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Petrisat",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Pețelca",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Pianu de Jos",
+  "locality_type": "village"
+ },
+ {
+  "name": "Pianu de Sus",
+  "locality_type": "village"
+ },
+ {
+  "name": "Pirita",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Pitarcești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Pițiga",
+  "locality_type": "village"
+ },
+ {
+  "name": "Plai",
+  "locality_type": "village"
+ },
+ {
+  "name": "Plaiuri",
+  "locality_type": "village"
+ },
+ {
+  "name": "Pleșcuța",
+  "locality_type": "village"
+ },
+ {
+  "name": "Pleșești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Pleși",
+  "locality_type": "village"
+ },
+ {
+  "name": "Pliști",
+  "locality_type": "village"
+ },
+ {
+  "name": "Podu lui Paul",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Poduri",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Poduri-Bricești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Poiana",
+  "locality_type": "village"
+ },
+ {
+  "name": "Poiana Aiudului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Poiana Ampoiului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Poiana Galdei",
+  "locality_type": "village"
+ },
+ {
+  "name": "Poiana Ursului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Poiana Vadului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Poieni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Poienile-Mogoș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Poienița",
+  "locality_type": "village"
+ },
+ {
+  "name": "Poiu",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ponor",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ponorel",
+  "locality_type": "village"
+ },
+ {
+  "name": "Popești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Popeștii de Jos",
+  "locality_type": "village"
+ },
+ {
+  "name": "Popeștii de Sus",
+  "locality_type": "village"
+ },
+ {
+  "name": "Potionci",
+  "locality_type": "village"
+ },
+ {
+  "name": "Poșaga de Jos",
+  "locality_type": "village"
+ },
+ {
+  "name": "Poșaga de Sus",
+  "locality_type": "village"
+ },
+ {
+  "name": "Poșogani",
+  "locality_type": "village"
+ },
+ {
+  "name": "Preluca",
+  "locality_type": "village"
+ },
+ {
+  "name": "Presaca Ampoiului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Puiulețești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Purcareți",
+  "locality_type": "village"
+ },
+ {
+  "name": "Pușelești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Pânca",
+  "locality_type": "village"
+ },
+ {
+  "name": "Pîclișa",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Pîrau Gruiului",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Pîrau lui Mihai",
+  "locality_type": "village"
+ },
+ {
+  "name": "Pîrîu-Carbunari",
+  "locality_type": "village"
+ },
+ {
+  "name": "Racatau",
+  "locality_type": "village"
+ },
+ {
+  "name": "Rachita",
+  "locality_type": "village"
+ },
+ {
+  "name": "Rachiș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Radești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Rahau",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Raicani",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ratitiș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ravicești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Razboieni-Cetate",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Reciu",
+  "locality_type": "village"
+ },
+ {
+  "name": "Remetea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Robești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Rogoz",
+  "locality_type": "village"
+ },
+ {
+  "name": "Roșești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Roșia Montana",
+  "locality_type": "village"
+ },
+ {
+  "name": "Roșia de Secaș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Runc",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Runcuri",
+  "locality_type": "village"
+ },
+ {
+  "name": "Rusești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ruși",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Rîmetea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Rîmeț",
+  "locality_type": "village"
+ },
+ {
+  "name": "Sagagea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Salagești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Salciua de Jos",
+  "locality_type": "village"
+ },
+ {
+  "name": "Salciua de Sus",
+  "locality_type": "village"
+ },
+ {
+  "name": "Saliștea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Saliștea-Deal",
+  "locality_type": "village"
+ },
+ {
+  "name": "Saracsau",
+  "locality_type": "village"
+ },
+ {
+  "name": "Sartaș",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Sasciori",
+  "locality_type": "village"
+ },
+ {
+  "name": "Scarișoara",
+  "locality_type": "village"
+ },
+ {
+  "name": "Scoarța",
+  "locality_type": "village"
+ },
+ {
+  "name": "Sebeș",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Sebeșel",
+  "locality_type": "village"
+ },
+ {
+  "name": "Sebișești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Secașel",
+  "locality_type": "village"
+ },
+ {
+  "name": "Segaj",
+  "locality_type": "village"
+ },
+ {
+  "name": "Sfoartea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Sfîrcea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Sicoiești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Silivaș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Simulești",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Snide",
+  "locality_type": "village"
+ },
+ {
+  "name": "Soharu",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Sohodol",
+  "locality_type": "village"
+ },
+ {
+  "name": "Sorlița",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Spatac",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Stanești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Stauini",
+  "locality_type": "village"
+ },
+ {
+  "name": "Straja",
+  "locality_type": "village"
+ },
+ {
+  "name": "Stremț",
+  "locality_type": "village"
+ },
+ {
+  "name": "Strungari",
+  "locality_type": "village"
+ },
+ {
+  "name": "Sturu",
+  "locality_type": "village"
+ },
+ {
+  "name": "Stâna de Mureș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Stîlnișoara",
+  "locality_type": "village"
+ },
+ {
+  "name": "Sub Piatra",
+  "locality_type": "village"
+ },
+ {
+  "name": "Sucești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Surdești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Suseni",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Sînbenedic",
+  "locality_type": "village"
+ },
+ {
+  "name": "Sîncel",
+  "locality_type": "village"
+ },
+ {
+  "name": "Sîncrai",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Sînmiclauș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Sîntamarie",
+  "locality_type": "village"
+ },
+ {
+  "name": "Sîntimbru",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tamborești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tartaria",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tatîrlaua",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tau",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tau Bistra",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tauni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tauți",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tecșești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Teiu",
+  "locality_type": "village"
+ },
+ {
+  "name": "Teiuș",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Teleac",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tibru",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tiur",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Toci",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tolacești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tomești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tomnatec",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tomușești",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Tomuțești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tonea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Totoi",
+  "locality_type": "village"
+ },
+ {
+  "name": "Toțești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Trifești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Trișorești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Trîmpoiele",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Trîncești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Turdaș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tîrsa",
+  "locality_type": "village"
+ },
+ {
+  "name": "Tîrsa-Plai",
+  "locality_type": "village"
+ },
+ {
+  "name": "Uioara de Jos",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Uioara de Sus",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Ungurei",
+  "locality_type": "village"
+ },
+ {
+  "name": "Unirea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Urdeș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vadu Moților",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vai",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vale In Jos",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Abruzel",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Alba",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Barnii",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Bistrii",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Valea Bucurului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Bîrluțești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Caselor",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Valea Cerbului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Ciuciului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Cocești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Fagetului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Giogești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Goblii",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Holhorii",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Inzelului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Larga",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Lunga",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Lupșii",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Maciului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Manastirii",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Mare",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Mica",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Valea Mlacii",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Morii",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Negrilesii",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Poienii",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Sasului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Uzei",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Uțului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Verde",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Vințului",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea lui Mihai",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Șesii",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valea Țupilor",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valeni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Valișoara",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vama Seaca",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vanvucești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vasești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Verdești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Veseuș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Veza",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Vidolm",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vidra",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vidrișoara",
+  "locality_type": "village"
+ },
+ {
+  "name": "Viezuri",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vinerea",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Vingard",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vința",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vințu de Jos",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vladești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vladoșești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vulcan",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vurpar",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vîlcaneasa",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vîlcea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vîlcești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vîltori",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Vîrtanești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vîrtop",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vîrși",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Vîrși-Rontu",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vîrșii Mari",
+  "locality_type": "village"
+ },
+ {
+  "name": "Vîrșii Mici",
+  "locality_type": "village"
+ },
+ {
+  "name": "Zagriș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Zarieș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Zlatna",
+  "locality_type": "urban"
+ },
+ {
+  "name": "Zînzești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Întregalde",
+  "locality_type": "village"
+ },
+ {
+  "name": "Șard",
+  "locality_type": "village"
+ },
+ {
+  "name": "Șasa",
+  "locality_type": "village"
+ },
+ {
+  "name": "Șeușa",
+  "locality_type": "village"
+ },
+ {
+  "name": "Șibot",
+  "locality_type": "village"
+ },
+ {
+  "name": "Șilea",
+  "locality_type": "village"
+ },
+ {
+  "name": "Șimocești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Șoal",
+  "locality_type": "village"
+ },
+ {
+  "name": "Șoicești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Șoimuș",
+  "locality_type": "village"
+ },
+ {
+  "name": "Șona",
+  "locality_type": "village"
+ },
+ {
+  "name": "Șpalnaca",
+  "locality_type": "village"
+ },
+ {
+  "name": "Șpring",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ștefanca",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ștei-Arieșeni",
+  "locality_type": "village"
+ },
+ {
+  "name": "Ștertești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Știuleți",
+  "locality_type": "village"
+ },
+ {
+  "name": "Șugag",
+  "locality_type": "village"
+ },
+ {
+  "name": "Țaranești",
+  "locality_type": "village"
+ },
+ {
+  "name": "Țarina",
+  "locality_type": "village"
+ },
+ {
+  "name": "Țelna",
+  "locality_type": "village"
+ },
+ {
+  "name": "Țifra",
+  "locality_type": "urban"
+ }
+]

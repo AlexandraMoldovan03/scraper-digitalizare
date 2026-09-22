@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8"/>
+  <title>Pagina cu JSON-LD invalid</title>
+</head>
+<body>
+  <!-- Primul script: JSON invalid — trebuie ignorat cu warning -->
+  <script type="application/ld+json">
+  { this is invalid json !!! not parseable @@@
+  </script>
+
+  <!-- Al doilea script: JSON valid — trebuie procesat -->
+  <script type="application/ld+json">
+  {
+    "@id": "https://www.imobiliare.ro/#/schema/Product/item-777777777",
+    "name": "Listing valid dupa JSON invalid",
+    "description": "Bloc JSON-LD valid care urmeaza unuia invalid.",
+    "offers": {
+      "@type": "Offer",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "price": 50000,
+        "priceCurrency": "EUR"
+      }
+    }
+  }
+  </script>
+
+  <!-- Link HTML pentru testul fallback -->
+  <a href="/vanzare-apartamente/alba-iulia/apartament-item-777777777">Apartament valid</a>
+</body>
+</html>
