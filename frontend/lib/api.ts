@@ -26,11 +26,32 @@ export interface ListingFilters {
   city_id?: number;
   zone?: string;
   rooms?: number;
+  min_price?: number;
   max_price?: number;
   max_price_per_m2?: number;
+  min_surface?: number;
+  max_surface?: number;
   data_quality?: string;
+  source_slug?: string;
+  property_type?: string;     // apartment | house | land | commercial
+  transaction_type?: string;  // sale | rent
+  seller_type?: string;       // private | agency | developer
+  locality?: string;
+  q?: string;
+  new_days?: number;
+  sort?: string;
+  order?: string;
   limit?: number;
   offset?: number;
+}
+
+export interface ListingsSummary {
+  total: number;
+  new_7d: number;
+  avg_price_eur: number | null;
+  avg_price_per_m2: number | null;
+  by_seller_type: Record<string, number>;
+  by_property_type: Record<string, number>;
 }
 
 function buildQueryString(params: ListingFilters): string {
@@ -92,6 +113,11 @@ export const api = {
   listings: (params?: ListingFilters) => {
     const qs = params ? buildQueryString(params) : '';
     return fetchAPI<MarketListing[]>(`/api/v1/market/listings${qs}`);
+  },
+
+  listingsSummary: (params?: ListingFilters) => {
+    const qs = params ? buildQueryString(params) : '';
+    return fetchAPI<ListingsSummary>(`/api/v1/market/listings/summary${qs}`);
   },
 
   zones: (cityId: number) =>

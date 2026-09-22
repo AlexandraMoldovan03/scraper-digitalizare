@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "AgencyIntel – Analizor anunțuri",
+  "version": "1.0.0",
+  "description": "Pe orice anunț imobiliar (OLX, Storia, imobiliare.ro, Publi24, Romimo) arată dacă prețul e bun față de piața din Alba, duplicatele de pe alte site-uri și alternative mai ieftine de la proprietari.",
+  "permissions": ["storage"],
+  "host_permissions": ["http://127.0.0.1:8000/*", "http://localhost:8000/*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_title": "AgencyIntel – caută anunțuri", "default_popup": "popup.html" },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.olx.ro/d/oferta/*",
+        "https://www.olx.ro/oferta/*",
+        "https://www.storia.ro/ro/oferta/*",
+        "https://www.imobiliare.ro/oferta/*",
+        "https://www.publi24.ro/anunturi/imobiliare/*",
+        "https://www.romimo.ro/*"
+      ],
+      "js": ["common.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

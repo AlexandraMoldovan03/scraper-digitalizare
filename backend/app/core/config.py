@@ -45,6 +45,16 @@ class Settings(BaseSettings):
     storia_request_delay_seconds: float = 1.5    # delay politicos între requesturi
     storia_request_timeout_seconds: int = 30
 
+    # Scraping — OLX.ro (API JSON public, cele mai multe anunțuri de la proprietari)
+    scrape_olx_enabled: bool = True
+    scrape_olx_interval_minutes: int = 60
+    scrape_olx_max_pages: int = 25              # 25 × 40 = 1000 anunțuri / categorie (limita OLX)
+    olx_request_delay_seconds: float = 1.0
+
+    # Extensia de browser (analiză anunț pe OLX/Storia/imobiliare/Publi24)
+    # Pune o valoare lungă, aleatoare, în .env și aceeași valoare în setările extensiei.
+    extension_api_key: str = ""
+
     model_config = SettingsConfigDict(
         env_file=BACKEND_DIR / ".env",
         env_file_encoding="utf-8",

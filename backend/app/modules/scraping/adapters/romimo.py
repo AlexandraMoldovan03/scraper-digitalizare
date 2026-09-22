@@ -627,6 +627,24 @@ class RomimoAdapter(SourceAdapter):
 
     # ── scrape_all — punct de intrare principal ───────────────────────────────
 
+    def iter_batches(self, max_pages: int | None = None):
+        """Livrează câte o pagină de rezultate (cu detaliile ei) — salvată imediat."""
+        if max_pages is None:
+            max_pages = settings.romimo_max_pages
+        delay = settings.romimo_request_delay_seconds
+        with self._make_client() as client:
+            for cat_key, (start_url, prop_type, txn_type) in CATEGORY_SEARCH_URLS.items():
+                logger.info("Romimo: starting category '%s' (max_pages=%d)", cat_key, max_pages)
+                yield from self._iter_category(
+                    client=client,
+                    start_url=start_url,
+                    category_key=cat_key,
+                    prop_type=prop_type,
+                    txn_type=txn_type,
+                    max_pages=max_pages,
+                    delay=delay,
+                )
+
     def scrape_all(self, max_pages: int | None = None) -> list[ScrapedListing]:
         """
         Rulare completă: descoperă + fetch + parse pentru toate categoriile.
@@ -669,6 +687,24 @@ class RomimoAdapter(SourceAdapter):
     ) -> list[ScrapedListing]:
         """Iterare paginată pentru o categorie. Oprire pe duplicate sau blocare."""
         results: list[ScrapedListing] = []
+        for page_results in self._iter_category(
+            client=client, start_url=start_url, category_key=category_key,
+            prop_type=prop_type, txn_type=txn_type, max_pages=max_pages, delay=delay,
+        ):
+            results.extend(page_results)
+        return results
+
+    def _iter_category(
+        self,
+        client: httpx.Client,
+        start_url: str,
+        category_key: str,
+        prop_type: str,
+        txn_type: str,
+        max_pages: int,
+        delay: float,
+    ):
+        """Generator: livrează anunțurile fiecărei pagini imediat ce sunt citite."""
         seen_ids: set[str] = set()
         current_url: str | None = start_url
         page_num = 0
@@ -705,6 +741,7 @@ class RomimoAdapter(SourceAdapter):
                 seen_ids.add(ref["external_id"])
 
             # Fetch detalii
+            results: list[ScrapedListing] = []
             for ref in new_refs:
                 time.sleep(delay)
                 detail_raw = self._fetch_html(client, ref["url"])
@@ -730,13 +767,14 @@ class RomimoAdapter(SourceAdapter):
                 else:
                     logger.warning("Romimo: parse_listing returned None for %s", ref["url"][:80])
 
+            if results:
+                yield results
+
             if current_url is None:
                 break
 
             # Pagina urmatoare
             current_url = self._find_next_page(soup, current_url)
-
-        return results
 
     # ── Parsare pagina de detaliu ─────────────────────────────────────────────
 

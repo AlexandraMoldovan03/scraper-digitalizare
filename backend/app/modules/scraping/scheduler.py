@@ -48,6 +48,14 @@ def _source_schedule_config() -> dict[str, tuple[bool, int]]:
             settings.scrape_romimo_enabled,
             settings.scrape_romimo_interval_minutes,
         ),
+        "storia": (
+            settings.scrape_storia_enabled,
+            settings.scrape_storia_interval_minutes,
+        ),
+        "olx": (
+            settings.scrape_olx_enabled,
+            settings.scrape_olx_interval_minutes,
+        ),
     }
 
 
@@ -102,7 +110,8 @@ def setup_scheduler() -> None:
         if source_key not in registered:
             logger.warning("Scheduler: '%s' not in registry — skip", source_key)
             continue
-        if not enabled:
+        if not enabled or not settings.scraping_scheduler_enabled:
+            # SCRAPING_SCHEDULER_ENABLED=false oprește toate rulările automate
             logger.info("Scheduler: '%s' disabled in config — skip", source_key)
             continue
 

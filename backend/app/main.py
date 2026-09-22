@@ -16,6 +16,7 @@ from app.modules.market.router import router as market_router
 from app.modules.opportunities.router import router as opportunities_router
 from app.modules.organizations.router import router as organizations_router
 from app.modules.scraping.router import router as scraping_router
+from app.modules.extension.router import router as extension_router
 
 
 # ── Rate limiter ───────────────────────────────────────────────────────────────
@@ -63,7 +64,7 @@ app.add_middleware(
     allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allow_headers=["Authorization", "Content-Type"],
+    allow_headers=["Authorization", "Content-Type", "X-Extension-Key"],
 )
 
 # ── Routers ────────────────────────────────────────────────────────────────────
@@ -74,6 +75,7 @@ app.include_router(organizations_router, prefix="/api/v1")
 app.include_router(clients_router, prefix="/api/v1")
 app.include_router(opportunities_router, prefix="/api/v1")
 app.include_router(scraping_router, prefix="/api/v1")
+app.include_router(extension_router, prefix="/api/v1")
 
 
 # ── Health ─────────────────────────────────────────────────────────────────────

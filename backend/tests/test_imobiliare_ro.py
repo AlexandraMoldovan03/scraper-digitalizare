@@ -713,9 +713,10 @@ def test_manual_job_trigger(engine):
         seller_type="private",
     )
 
+    # Orchestratorul consumă adapter.iter_batches() (salvare pe loturi)
     with patch(
-        "app.modules.scraping.adapters.imobiliare_ro.ImobiliareRoAdapter.scrape_all",
-        return_value=[mock_listing]
+        "app.modules.scraping.adapters.imobiliare_ro.ImobiliareRoAdapter.iter_batches",
+        return_value=iter([[mock_listing]])
     ), patch("app.modules.scraping.orchestrator.engine", engine), \
        patch("app.core.config.settings.scrape_imobiliare_ro_enabled", True), \
        patch("app.core.config.settings.scrape_imobiliare_ro_authorized", True):
@@ -824,12 +825,12 @@ def test_imobiliare_failure_doesnt_stop_publi24(engine):
     with patch("app.modules.scraping.orchestrator.engine", engine):
         from app.modules.scraping.orchestrator import _run_scrape_job_sync
 
-        with patch("app.modules.scraping.adapters.imobiliare_ro.ImobiliareRoAdapter.scrape_all", side_effect=RuntimeError("Blocat")):
+        with patch("app.modules.scraping.adapters.imobiliare_ro.ImobiliareRoAdapter.iter_batches", side_effect=RuntimeError("Blocat")):
             with Session(engine) as s:
                 imob_job_id = run_job("imobiliare_ro", s)
             _run_scrape_job_sync(imob_job_id)
 
-        with patch("app.modules.scraping.adapters.publi24.Publi24Adapter.scrape_all", return_value=[mock_publi24_listing]):
+        with patch("app.modules.scraping.adapters.publi24.Publi24Adapter.iter_batches", return_value=iter([[mock_publi24_listing]])):
             with Session(engine) as s:
                 p24_job_id = run_job("publi24", s)
             _run_scrape_job_sync(p24_job_id)

@@ -424,15 +424,54 @@ const QUALITY_OPTIONS = [
 
 const SOURCE_OPTIONS = [
   { value: '', label: 'Toate sursele' },
+  { value: 'olx', label: 'OLX' },
   { value: 'publi24', label: 'Publi24' },
+  { value: 'storia', label: 'Storia' },
   { value: 'imobiliare_ro', label: 'Imobiliare.ro' },
+  { value: 'romimo', label: 'Romimo' },
+];
+
+const TYPE_OPTIONS = [
+  { value: '', label: 'Toate tipurile' },
+  { value: 'apartment', label: 'Apartamente' },
+  { value: 'house', label: 'Case / vile' },
+  { value: 'land', label: 'Terenuri' },
+  { value: 'commercial', label: 'Spații comerciale' },
+];
+
+const TYPE_LABEL: Record<string, string> = {
+  apartment: 'Apartament',
+  house: 'Casă',
+  land: 'Teren',
+  commercial: 'Spațiu comercial',
+};
+
+const TRANSACTION_OPTIONS = [
+  { value: 'sale', label: 'Vânzare' },
+  { value: 'rent', label: 'Închiriere' },
+  { value: '', label: 'Toate' },
+];
+
+const SELLER_OPTIONS = [
+  { value: '', label: 'Toți vânzătorii' },
+  { value: 'private', label: 'Doar proprietari' },
+  { value: 'agency', label: 'Doar agenții' },
+  { value: 'developer', label: 'Dezvoltatori' },
+];
+
+const NEW_OPTIONS = [
+  { value: '', label: 'Oricând' },
+  { value: '1', label: 'Ultimele 24 h' },
+  { value: '3', label: 'Ultimele 3 zile' },
+  { value: '7', label: 'Ultima săptămână' },
+  { value: '30', label: 'Ultima lună' },
 ];
 
 // ── Seller Type Badge ─────────────────────────────────────────────────────────
 
 function SellerTypeBadge({ sellerType }: { sellerType?: string | null }) {
   const config: Record<string, { label: string; color: string }> = {
-    private:   { label: 'Persoană fizică', color: 'text-purple-700 bg-purple-50 border-purple-200' },
+    private:   { label: 'Proprietar', color: 'text-teal-700 bg-teal-50 border-teal-200' },
     agency:    { label: 'Agenție',         color: 'text-blue-700 bg-blue-50 border-blue-200' },
     developer: { label: 'Developer',       color: 'text-orange-700 bg-orange-50 border-orange-200' },
     unknown:   { label: '—',              color: 'text-gray-400 bg-gray-50 border-gray-200' },
@@ -464,6 +503,12 @@ export default function ListingsPage() {
   const [filterQuality, setFilterQuality] = useState('');
   const [filterLocality, setFilterLocality] = useState('');
   const [filterSource, setFilterSource] = useState('');
+  const [filterType, setFilterType] = useState('');
+  const [filterTx, setFilterTx] = useState('sale');
+  const [filterSeller, setFilterSeller] = useState('');
+  const [filterQ, setFilterQ] = useState('');
+  const [filterMinSurface, setFilterMinSurface] = useState('');
+  const [filterNewDays, setFilterNewDays] = useState('');
 
   // Sortare
   const [sortKey, setSortKey] = useState<SortKey>(null);
@@ -471,16 +516,48 @@ export default function ListingsPage() {
 
   const [refreshMsg, setRefreshMsg] = useState('');
 
+  // Filtrele se aplică pe server (toată baza), nu doar pe anunțurile încărcate
+  const serverFilters = {
+    city_id: selectedCityId ?? undefined,
+    zone: filterZone || undefined,
+    rooms: filterRooms ? Number(filterRooms) : undefined,
+    max_price: filterMaxPrice ? Number(filterMaxPrice) : undefined,
+    max_price_per_m2: filterMaxPpm2 ? Number(filterMaxPpm2) : undefined,
+    min_surface: filterMinSurface ? Number(filterMinSurface) : undefined,
+    source_slug: filterSource || undefined,
+    property_type: filterType || undefined,
+    transaction_type: filterTx || undefined,
+    seller_type: filterSeller || undefined,
+    locality: filterLocality || undefined,
+    q: filterQ.trim() || undefined,
+    new_days: filterNewDays ? Number(filterNewDays) : undefined,
+  };
+  const filterKey = JSON.stringify(serverFilters);
+
+  // Paginare: toate anunțurile, câte PAGE_SIZE pe pagină
+  const PAGE_SIZE = 100;
+  const [page, setPage] = useState(1);
+  useEffect(() => { setPage(1); }, [filterKey, filterQuality, sortKey, sortDir]);
+
   const { data: listings = [], isLoading, isError, isFetching } = useQuery({
-    queryKey: ['listings', selectedCityId, filterZone, filterRooms, filterMaxPrice, filterMaxPpm2, filterQuality],
+    queryKey: ['listings', filterKey, filterQuality, sortKey, sortDir, page],
     queryFn: () => api.listings({
-      city_id: selectedCityId ?? undefined,
-      zone: filterZone || undefined,
-      rooms: filterRooms ? Number(filterRooms) : undefined,
-      max_price: filterMaxPrice ? Number(filterMaxPrice) : undefined,
-      max_price_per_m2: filterMaxPpm2 ? Number(filterMaxPpm2) : undefined,
+      ...serverFilters,
       data_quality: filterQuality || undefined,
+      sort: sortKey ?? 'new',
+      order: sortKey ? sortDir : 'desc',
+      limit: PAGE_SIZE,
+      offset: (page - 1) * PAGE_SIZE,
     }),
+    placeholderData: (prev) => prev,
+    // reîmprospătare periodică: anunțurile noi apar pe parcurs, în timpul actualizării
+    refetchInterval: 20000,
+  });
+
+  const { data: summary } = useQuery({
+    queryKey: ['listings-summary', filterKey],
+    queryFn: () => api.listingsSummary(serverFilters),
+    refetchInterval: 20000,
   });
 
   const { data: cities = [] } = useQuery({
@@ -535,53 +612,31 @@ export default function ListingsPage() {
   // Stats
   const withoutImages = listings.filter((l) => !l.image_urls?.length).length;
   const warningCount = listings.filter((l) => l.data_quality === 'warning').length;
-  const newCount = listings.filter((l) => daysOnMarket(l.first_seen_at) <= 7).length;
+  const newCount = summary?.new_7d ?? listings.filter((l) => daysOnMarket(l.first_seen_at) <= 7).length;
 
-  const avgPrice = useMemo(() => {
+  const avgPriceLocal = useMemo(() => {
     const valid = listings.filter((l) => l.price_eur);
     if (!valid.length) return null;
     return Math.round(valid.reduce((s, l) => s + l.price_eur!, 0) / valid.length);
   }, [listings]);
 
-  const avgPpm2 = useMemo(() => {
+  const avgPpm2Local = useMemo(() => {
     const valid = listings.filter((l) => l.price_per_m2);
     if (!valid.length) return null;
     return Math.round(valid.reduce((s, l) => s + l.price_per_m2!, 0) / valid.length);
   }, [listings]);
 
-  const hasFilters = filterCity || filterZone || filterRooms || filterMaxPrice || filterMaxPpm2 || filterQuality || filterLocality || filterSource;
+  const avgPrice = summary?.avg_price_eur ?? avgPriceLocal;
+  const avgPpm2 = summary?.avg_price_per_m2 ?? avgPpm2Local;
+  const totalCount = summary?.total ?? listings.length;
+  const ownersCount = summary?.by_seller_type?.private ?? 0;
+
+  const hasFilters = filterType || filterSeller || filterQ || filterMinSurface || filterNewDays || filterTx !== 'sale' || filterCity || filterZone || filterRooms || filterMaxPrice || filterMaxPpm2 || filterQuality || filterLocality || filterSource;
 
   // Client-side locality filter (zone/city/rooms/price/quality are server-side)
-  const filtered = useMemo(() => {
-    let result = listings.filter((l) => {
-      if (filterLocality && l.location_raw !== filterLocality) return false;
-      if (filterSource) {
-        const srcName = sourceMap[l.source_id ?? 0] ?? '';
-        if (!srcName.toLowerCase().includes(filterSource === 'imobiliare_ro' ? 'imobiliare' : filterSource)) return false;
-      }
-      return true;
-    });
-
-    // Sortare
-    if (sortKey) {
-      result = [...result].sort((a, b) => {
-        let av: number, bv: number;
-        if (sortKey === 'days') {
-          av = daysOnMarket(a.first_seen_at);
-          bv = daysOnMarket(b.first_seen_at);
-        } else if (sortKey === 'published_at') {
-          av = a.published_at ? new Date(a.published_at).getTime() : 0;
-          bv = b.published_at ? new Date(b.published_at).getTime() : 0;
-        } else {
-          av = (a[sortKey] as number) ?? 0;
-          bv = (b[sortKey] as number) ?? 0;
-        }
-        return sortDir === 'asc' ? av - bv : bv - av;
-      });
-    }
-
-    return result;
-  }, [listings, filterLocality, filterSource, sourceMap, sortKey, sortDir]);
+  // Sortarea se face pe server (pe toată baza), nu doar pe pagina curentă
+  const filtered = listings;
+  const totalPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE));
 
   function handleSort(key: SortKey) {
     if (sortKey === key) {
@@ -609,11 +664,18 @@ export default function ListingsPage() {
     setFilterMaxPpm2('');
     setFilterQuality('');
     setFilterSource('');
+    setFilterType('');
+    setFilterTx('sale');
+    setFilterSeller('');
+    setFilterQ('');
+    setFilterMinSurface('');
+    setFilterNewDays('');
   }
 
   function handleJobCompleted() {
     // Reload listings, cities, zones și statistici după import reușit
     queryClient.invalidateQueries({ queryKey: ['listings'] });
+    queryClient.invalidateQueries({ queryKey: ['listings-summary'] });
     queryClient.invalidateQueries({ queryKey: ['cities'] });
     queryClient.invalidateQueries({ queryKey: ['zones'] });
     queryClient.invalidateQueries({ queryKey: ['sources'] });
@@ -626,9 +688,10 @@ export default function ListingsPage() {
       <ScrapingPanel onJobCompleted={handleJobCompleted} />
 
       {/* Stats bar */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
         {[
-          { label: 'Total anunțuri', value: listings.length, icon: Building2, color: 'text-blue-600 bg-blue-50' },
+          { label: 'Total anunțuri', value: totalCount.toLocaleString('ro-RO'), icon: Building2, color: 'text-blue-600 bg-blue-50' },
+          { label: 'De la proprietari', value: ownersCount.toLocaleString('ro-RO'), icon: CheckCircle2, color: 'text-teal-600 bg-teal-50' },
           { label: 'Noi (≤7 zile)', value: newCount, icon: Calendar, color: 'text-emerald-600 bg-emerald-50' },
           { label: 'Preț mediu', value: avgPrice ? `${avgPrice.toLocaleString('ro-RO')} €` : '—', icon: TrendingUp, color: 'text-purple-600 bg-purple-50' },
           { label: 'Medie €/mp', value: avgPpm2 ? `${avgPpm2.toLocaleString('ro-RO')} €` : '—', icon: TrendingUp, color: 'text-orange-600 bg-orange-50' },
@@ -699,8 +762,17 @@ export default function ListingsPage() {
               </button>
             )}
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-7 gap-3">
-            <Select label="Localitate" value={filterLocality} options={localityOptions} onChange={(e) => setFilterLocality(e.target.value)} />
+          {/* Căutare principală: tip, tranzacție, vânzător */}
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 mb-3">
+            <Select label="Tip proprietate" value={filterType} options={TYPE_OPTIONS} onChange={(e) => setFilterType(e.target.value)} />
+            <Select label="Tranzacție" value={filterTx} options={TRANSACTION_OPTIONS} onChange={(e) => setFilterTx(e.target.value)} />
+            <Select label="Vânzător" value={filterSeller} options={SELLER_OPTIONS} onChange={(e) => setFilterSeller(e.target.value)} />
+            <Select label="Apărute" value={filterNewDays} options={NEW_OPTIONS} onChange={(e) => setFilterNewDays(e.target.value)} />
+            <Input label="Caută în anunț" placeholder="ex: centrală, garaj, Cetate" value={filterQ} onChange={(e) => setFilterQ(e.target.value)} />
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
+            <Input label="Localitate" placeholder="ex: Sebeș, Micești" value={filterLocality} onChange={(e) => setFilterLocality(e.target.value)} list="ai-localities" />
+            <datalist id="ai-localities">{localities.map((loc) => <option key={loc} value={loc} />)}</datalist>
             <Select label="Oraș (DB)" value={filterCity} options={cityOptions} onChange={(e) => handleCityChange(e.target.value)} />
             <Select
               label="Zonă"
@@ -712,6 +784,7 @@ export default function ListingsPage() {
             <Select label="Camere" value={filterRooms} options={ROOMS_OPTIONS} onChange={(e) => setFilterRooms(e.target.value)} />
             <Input label="Preț maxim (EUR)" type="number" placeholder="ex: 100 000" value={filterMaxPrice} onChange={(e) => setFilterMaxPrice(e.target.value)} />
             <Input label="EUR/mp maxim" type="number" placeholder="ex: 2 000" value={filterMaxPpm2} onChange={(e) => setFilterMaxPpm2(e.target.value)} />
+            <Input label="Suprafață minimă (mp)" type="number" placeholder="ex: 50" value={filterMinSurface} onChange={(e) => setFilterMinSurface(e.target.value)} />
             <Select label="Calitate" value={filterQuality} options={QUALITY_OPTIONS} onChange={(e) => setFilterQuality(e.target.value)} />
             <Select label="Sursă" value={filterSource} options={SOURCE_OPTIONS} onChange={(e) => setFilterSource(e.target.value)} />
           </div>
@@ -720,8 +793,9 @@ export default function ListingsPage() {
 
       {/* Count */}
       <p className="text-sm text-gray-400">
-        {filtered.length} {filtered.length === 1 ? 'anunț' : 'anunțuri'}
-        {hasFilters && ` (din ${listings.length})`}
+        {totalCount.toLocaleString('ro-RO')} {totalCount === 1 ? 'anunț' : 'anunțuri'}
+        {totalCount > PAGE_SIZE && ` · pagina ${page} din ${totalPages}`}
+        {isFetching && !isLoading && ' · se actualizează…'}
       </p>
 
       {/* Error banner — background refetch eșuat, dar datele vechi sunt vizibile */}
@@ -801,6 +875,11 @@ export default function ListingsPage() {
                               )}
                             </div>
                             <div className="flex items-center gap-1.5 mt-0.5">
+                              {listing.property_type && TYPE_LABEL[listing.property_type] && (
+                                <span className="inline-flex items-center text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-gray-100 text-gray-600">
+                                  {TYPE_LABEL[listing.property_type]}{listing.transaction_type === 'rent' ? ' · chirie' : ''}
+                                </span>
+                              )}
                               {isNew && (
                                 <span className="inline-flex items-center text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700">
                                   NOU
@@ -905,6 +984,17 @@ export default function ListingsPage() {
           </div>
         )}
       </Card>
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-2 py-2">
+          <Button size="sm" variant="outline" disabled={page <= 1} onClick={() => { setPage(1); window.scrollTo({ top: 0 }); }}>« Prima</Button>
+          <Button size="sm" variant="outline" disabled={page <= 1} onClick={() => { setPage((p) => p - 1); window.scrollTo({ top: 0 }); }}>← Înapoi</Button>
+          <span className="text-sm text-gray-500 px-2">
+            Pagina {page} din {totalPages} · anunțurile {((page - 1) * PAGE_SIZE + 1).toLocaleString('ro-RO')}–{Math.min(page * PAGE_SIZE, totalCount).toLocaleString('ro-RO')} din {totalCount.toLocaleString('ro-RO')}
+          </span>
+          <Button size="sm" variant="outline" disabled={page >= totalPages} onClick={() => { setPage((p) => p + 1); window.scrollTo({ top: 0 }); }}>Înainte →</Button>
+          <Button size="sm" variant="outline" disabled={page >= totalPages} onClick={() => { setPage(totalPages); window.scrollTo({ top: 0 }); }}>Ultima »</Button>
+        </div>
+      )}
     </div>
   );
 }

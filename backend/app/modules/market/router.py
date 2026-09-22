@@ -219,41 +219,132 @@ def create_market_listing(
 
 # ── Endpoints protejate cu autentificare ───────────────────────────────────────
 
+def _csv(value: str | None) -> list[str]:
+    return [v.strip() for v in (value or "").split(",") if v.strip()]
+
+
+def _apply_listing_filters(
+    query,
+    session: Session,
+    *,
+    city_id: int | None = None,
+    zone: str | None = None,
+    rooms: int | None = None,
+    min_price: float | None = None,
+    max_price: float | None = None,
+    max_price_per_m2: float | None = None,
+    min_surface: float | None = None,
+    max_surface: float | None = None,
+    source_slug: str | None = None,
+    property_type: str | None = None,
+    transaction_type: str | None = None,
+    seller_type: str | None = None,
+    locality: str | None = None,
+    q: str | None = None,
+    new_days: int | None = None,
+):
+    """Filtrele comune pentru listă, sumar și extensie."""
+    from datetime import timedelta
+    from sqlalchemy import func, or_
+
+    if city_id is not None:
+        query = query.where(MarketListing.city_id == city_id)
+    if zone:
+        query = query.where(MarketListing.zone_normalized == zone)
+    if rooms is not None:
+        # 4 = „4+ camere”
+        query = query.where(MarketListing.rooms >= 4) if rooms >= 4 else query.where(MarketListing.rooms == rooms)
+    if min_price is not None:
+        query = query.where(MarketListing.price_eur >= min_price)
+    if max_price is not None:
+        query = query.where(MarketListing.price_eur <= max_price)
+    if max_price_per_m2 is not None:
+        query = query.where(MarketListing.price_per_m2 <= max_price_per_m2)
+    if min_surface is not None:
+        query = query.where(MarketListing.surface_m2 >= min_surface)
+    if max_surface is not None:
+        query = query.where(MarketListing.surface_m2 <= max_surface)
+    if source_slug:
+        slugs = _csv(source_slug)
+        ids = [s.id for s in session.exec(select(Source).where(Source.slug.in_(slugs))).all()]
+        query = query.where(MarketListing.source_id.in_(ids or [-1]))
+    if property_type:
+        query = query.where(MarketListing.property_type.in_(_csv(property_type)))
+    if transaction_type:
+        query = query.where(MarketListing.transaction_type.in_(_csv(transaction_type)))
+    if seller_type:
+        query = query.where(MarketListing.seller_type.in_(_csv(seller_type)))
+    if new_days:
+        query = query.where(MarketListing.first_seen_at >= datetime.utcnow() - timedelta(days=new_days))
+    if locality:
+        # localitatea exactă din sursă (ex. „Micești”, „Sebeș”)
+        raw_ids = select(MarketListingRaw.id).where(MarketListingRaw.location_raw.ilike(f"%{locality}%"))
+        query = query.where(MarketListing.raw_listing_id.in_(raw_ids))
+    if q:
+        for word in [w for w in q.split() if len(w) > 1][:6]:
+            like = f"%{word}%"
+            query = query.where(or_(
+                MarketListing.title.ilike(like),
+                MarketListing.description.ilike(like),
+                MarketListing.zone_raw.ilike(like),
+            ))
+    return query
+
+
 @router.get("/listings")
 def list_market_listings(
     city_id: int | None = None,
     zone: str | None = None,
     rooms: int | None = None,
+    min_price: float | None = None,
     max_price: float | None = None,
     max_price_per_m2: float | None = None,
+    min_surface: float | None = None,
+    max_surface: float | None = None,
     data_quality: str | None = None,
     source_slug: str | None = None,
-    limit: int = 200,
+    property_type: str | None = None,       # apartment,house,land,commercial (virgulă = mai multe)
+    transaction_type: str | None = None,    # sale / rent
+    seller_type: str | None = None,         # private / agency / developer
+    locality: str | None = None,
+    q: str | None = None,
+    new_days: int | None = None,
+    sort: str = "new",      # new | price_eur | surface_m2 | price_per_m2 | published_at | days
+    order: str = "desc",    # asc | desc
+    limit: int = 100,
     offset: int = 0,
     session: Session = Depends(get_session),
     _: User = Depends(get_current_user),
 ):
+    # Paginare pe server: toate anunțurile sunt accesibile, câte `limit` pe pagină
+    limit = max(1, min(limit, 500))
+    offset = max(0, offset)
+    columns = {
+        "new": MarketListing.first_seen_at,
+        "days": MarketListing.first_seen_at,
+        "price_eur": MarketListing.price_eur,
+        "surface_m2": MarketListing.surface_m2,
+        "price_per_m2": MarketListing.price_per_m2,
+        "published_at": MarketListing.published_at,
+    }
+    col = columns.get(sort, MarketListing.first_seen_at)
+    asc = order == "asc"
+    if sort == "days":  # „zile pe piață” crescător = cele mai noi primele
+        asc = not asc
+    order_by = col.asc().nulls_last() if asc else col.desc().nulls_last()
     query = (
         select(MarketListing)
         .where(MarketListing.is_active == True)
         .where(MarketListing.listing_status != "inactive")
-        .order_by(MarketListing.first_seen_at.desc())
+        .order_by(order_by, MarketListing.id.desc())
     )
-
-    if city_id is not None:
-        query = query.where(MarketListing.city_id == city_id)
-    if zone is not None:
-        query = query.where(MarketListing.zone_normalized == zone)
-    if rooms is not None:
-        query = query.where(MarketListing.rooms == rooms)
-    if max_price is not None:
-        query = query.where(MarketListing.price_eur <= max_price)
-    if max_price_per_m2 is not None:
-        query = query.where(MarketListing.price_per_m2 <= max_price_per_m2)
-    if source_slug is not None:
-        src = session.exec(select(Source).where(Source.slug == source_slug)).first()
-        if src:
-            query = query.where(MarketListing.source_id == src.id)
+    query = _apply_listing_filters(
+        query, session,
+        city_id=city_id, zone=zone, rooms=rooms, min_price=min_price, max_price=max_price,
+        max_price_per_m2=max_price_per_m2, min_surface=min_surface, max_surface=max_surface,
+        source_slug=source_slug, property_type=property_type, transaction_type=transaction_type,
+        seller_type=seller_type, locality=locality, q=q, new_days=new_days,
+    )
 
     query = query.offset(offset).limit(limit)
     listings = session.exec(query).all()
@@ -284,6 +375,73 @@ def list_market_listings(
         )
 
     return result
+
+
+@router.get("/listings/summary")
+def listings_summary(
+    city_id: int | None = None,
+    zone: str | None = None,
+    rooms: int | None = None,
+    min_price: float | None = None,
+    max_price: float | None = None,
+    max_price_per_m2: float | None = None,
+    min_surface: float | None = None,
+    max_surface: float | None = None,
+    source_slug: str | None = None,
+    property_type: str | None = None,
+    transaction_type: str | None = None,
+    seller_type: str | None = None,
+    locality: str | None = None,
+    q: str | None = None,
+    new_days: int | None = None,
+    session: Session = Depends(get_session),
+    _: User = Depends(get_current_user),
+):
+    """Totaluri reale (nu doar din pagina încărcată) pentru filtrele date."""
+    from datetime import timedelta
+    from sqlalchemy import func
+
+    base = (
+        select(MarketListing.id)
+        .where(MarketListing.is_active == True)  # noqa: E712
+        .where(MarketListing.listing_status != "inactive")
+    )
+    base = _apply_listing_filters(
+        base, session,
+        city_id=city_id, zone=zone, rooms=rooms, min_price=min_price, max_price=max_price,
+        max_price_per_m2=max_price_per_m2, min_surface=min_surface, max_surface=max_surface,
+        source_slug=source_slug, property_type=property_type, transaction_type=transaction_type,
+        seller_type=seller_type, locality=locality, q=q, new_days=new_days,
+    ).subquery()
+
+    ids = select(base.c.id)
+    week_ago = datetime.utcnow() - timedelta(days=7)
+    row = session.exec(
+        select(
+            func.count(MarketListing.id),
+            func.count(MarketListing.id).filter(MarketListing.first_seen_at >= week_ago),
+            func.avg(MarketListing.price_eur),
+            func.avg(MarketListing.price_per_m2),
+        ).where(MarketListing.id.in_(ids))
+    ).one()
+    by_seller = dict(session.exec(
+        select(MarketListing.seller_type, func.count(MarketListing.id))
+        .where(MarketListing.id.in_(ids))
+        .group_by(MarketListing.seller_type)
+    ).all())
+    by_type = dict(session.exec(
+        select(MarketListing.property_type, func.count(MarketListing.id))
+        .where(MarketListing.id.in_(ids))
+        .group_by(MarketListing.property_type)
+    ).all())
+    return {
+        "total": int(row[0] or 0),
+        "new_7d": int(row[1] or 0),
+        "avg_price_eur": round(row[2]) if row[2] else None,
+        "avg_price_per_m2": round(row[3]) if row[3] else None,
+        "by_seller_type": {str(k or "unknown"): v for k, v in by_seller.items()},
+        "by_property_type": {str(k or "unknown"): v for k, v in by_type.items()},
+    }
 
 
 @router.post("/listings/refresh-images")

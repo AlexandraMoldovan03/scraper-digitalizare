@@ -144,6 +144,7 @@ _DISPLAY_NAMES: dict[str, str] = {
     "imobiliare_ro": "Imobiliare.ro",
     "romimo": "Romimo",
     "storia": "Storia",
+    "olx": "OLX",
 }
 
 

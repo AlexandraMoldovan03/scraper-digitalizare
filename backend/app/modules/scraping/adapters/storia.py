@@ -37,6 +37,8 @@ ALBA_CATEGORIES = [
     ("apartment", "sale", "vanzare/apartament/alba"),
     ("house",     "sale", "vanzare/casa/alba"),
     ("land",      "sale", "vanzare/teren/alba"),
+    ("apartment", "rent", "inchiriere/apartament/alba"),
+    ("house",     "rent", "inchiriere/casa/alba"),
 ]
 
 USER_AGENT = (
@@ -504,13 +506,31 @@ class StoriaAdapter(SourceAdapter):
         delay: float,
     ) -> list[ScrapedListing]:
         results: list[ScrapedListing] = []
+        for page_listings in self._iter_category(
+            client, path, property_type, transaction, max_pages, delay
+        ):
+            results.extend(page_listings)
+        return results
+
+    def _iter_category(
+        self,
+        client: httpx.Client,
+        path: str,
+        property_type: str,
+        transaction: str,
+        max_pages: int,
+        delay: float,
+    ):
+        """Generator: livrează anunțurile noi de pe fiecare pagină de rezultate."""
+        results_count = 0
         seen_ids: set[str] = set()
         total_pages: int | None = None
 
         for page in range(1, max_pages + 1):
-            url = f"{BASE_URL}/ro/rezultate/{path}"
+            # limit=72 → jumătate din cereri față de pagina implicită (36)
+            url = f"{BASE_URL}/ro/rezultate/{path}?limit=72"
             if page > 1:
-                url = f"{url}?page={page}"
+                url = f"{url}&page={page}"
 
             try:
                 data = self._fetch_next_data(client, url)
@@ -531,7 +551,7 @@ class StoriaAdapter(SourceAdapter):
                 logger.info("Storia: %s pagina %d — 0 anunturi, opresc", path, page)
                 break
 
-            new_on_page = 0
+            page_listings: list[ScrapedListing] = []
             for item in items:
                 listing = self._parse_item(item, property_type, transaction)
                 if listing is None:
@@ -539,24 +559,33 @@ class StoriaAdapter(SourceAdapter):
                 if listing.external_id in seen_ids:
                     continue
                 seen_ids.add(listing.external_id)
-                results.append(listing)
-                new_on_page += 1
+                page_listings.append(listing)
+            results_count += len(page_listings)
 
             logger.info(
                 "Storia: %s pagina %d — %d anunturi noi (total %d)",
-                path, page, new_on_page, len(results),
+                path, page, len(page_listings), results_count,
             )
 
-            if new_on_page == 0:
+            if not page_listings:
                 break
+            yield page_listings
+
             if total_pages is not None and page >= total_pages:
                 break
 
             time.sleep(delay)
 
-        return results
-
     def scrape_all(self, max_pages: int = 20) -> list[ScrapedListing]:
+        deduped: dict[str, ScrapedListing] = {}
+        for batch in self.iter_batches(max_pages=max_pages):
+            for listing in batch:
+                deduped.setdefault(listing.external_id or listing.url, listing)
+        logger.info("Storia: total %d anunturi unice", len(deduped))
+        return list(deduped.values())
+
+    def iter_batches(self, max_pages: int = 20):
+        """Livrează câte o pagină de rezultate — salvată imediat de orchestrator."""
         from app.core.config import settings
 
         if not getattr(settings, "scrape_storia_enabled", False):
@@ -568,7 +597,7 @@ class StoriaAdapter(SourceAdapter):
         delay = float(getattr(settings, "storia_request_delay_seconds", 1.5))
         timeout = int(getattr(settings, "storia_request_timeout_seconds", 30))
 
-        all_listings: list[ScrapedListing] = []
+        seen: set[str] = set()
 
         with httpx.Client(
             headers=HEADERS,
@@ -578,16 +607,22 @@ class StoriaAdapter(SourceAdapter):
             for property_type, transaction, path in ALBA_CATEGORIES:
                 logger.info("Storia: incep categoria %s", path)
                 try:
-                    found = self._scrape_category(
+                    for page_listings in self._iter_category(
                         client=client,
                         path=path,
                         property_type=property_type,
                         transaction=transaction,
                         max_pages=max_pages,
                         delay=delay,
-                    )
-                    all_listings.extend(found)
-                    logger.info("Storia: %s — %d anunturi", path, len(found))
+                    ):
+                        # Deduplicare globala (acelasi anunt poate aparea in doua categorii)
+                        fresh = [
+                            l for l in page_listings
+                            if (l.external_id or l.url) not in seen
+                        ]
+                        seen.update(l.external_id or l.url for l in fresh)
+                        if fresh:
+                            yield fresh
                 except StoriaBlockedError as exc:
                     # Blocaj real: oprim tot, nu insistam
                     logger.error("Storia: blocat — %s", exc)
@@ -598,11 +633,3 @@ class StoriaAdapter(SourceAdapter):
                     continue
 
                 time.sleep(delay)
-
-        # Deduplicare globala (acelasi anunt poate aparea in doua categorii)
-        deduped: dict[str, ScrapedListing] = {}
-        for listing in all_listings:
-            deduped.setdefault(listing.external_id or listing.url, listing)
-
-        logger.info("Storia: total %d anunturi unice", len(deduped))
-        return list(deduped.values())

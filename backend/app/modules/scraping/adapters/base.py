@@ -5,6 +5,7 @@ Fiecare sursă de anunțuri implementează această interfață.
 Orchestratorul generic apelează scrape_all() fără să cunoască sursa concretă.
 """
 from abc import ABC, abstractmethod
+from collections.abc import Iterator
 from dataclasses import dataclass, field
 from datetime import datetime
 
@@ -91,6 +92,17 @@ class SourceAdapter(ABC):
         Returnează lista completă de anunțuri procesate pentru o rulare.
         """
         ...
+
+    def iter_batches(self, max_pages: int = 20) -> Iterator[list[ScrapedListing]]:
+        """
+        Livrează anunțurile pe loturi (de ex. câte o pagină de rezultate),
+        ca orchestratorul să le salveze imediat în DB — anunțurile apar în
+        aplicație pe parcurs, nu doar la finalul rulării.
+
+        Implementarea implicită livrează totul într-un singur lot (compatibil
+        cu adaptorii existenți care implementează doar scrape_all()).
+        """
+        yield self.scrape_all(max_pages=max_pages)
 
     @abstractmethod
     def extract_external_id(self, url: str) -> str:

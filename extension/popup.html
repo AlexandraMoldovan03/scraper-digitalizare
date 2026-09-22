@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<style>
+  body{font:13px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;margin:0;width:380px;color:#0f172a}
+  header{background:#0f172a;color:#fff;padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
+  header a{color:#94a3b8;font-size:12px}
+  form{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px 12px;border-bottom:1px solid #e2e8f0}
+  label{font-size:11px;color:#475569;display:flex;flex-direction:column;gap:2px}
+  select,input{font:inherit;padding:5px 6px;border:1px solid #cbd5e1;border-radius:6px}
+  button{grid-column:1/-1;font:600 13px inherit;background:#2563eb;color:#fff;border:0;border-radius:8px;padding:8px;cursor:pointer}
+  #status{padding:6px 12px;font-size:12px;color:#64748b}
+  #results{max-height:380px;overflow:auto;padding:0 12px 12px}
+  a.item{display:flex;gap:8px;padding:6px;border-radius:8px;text-decoration:none;color:inherit;border:1px solid #f1f5f9;margin-top:6px}
+  a.item:hover{background:#f8fafc}
+  a.item img{width:60px;height:46px;object-fit:cover;border-radius:6px;background:#f1f5f9;flex:none}
+  .t{font-weight:600;font-size:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .muted{color:#64748b;font-size:11px}
+  .pill{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:99px;margin-right:4px}
+  .own{background:#ccfbf1;color:#115e59}.ag{background:#dbeafe;color:#1e40af}
+</style>
+</head>
+<body>
+<header><b>AgencyIntel · caută în Alba</b><a href="#" id="opts">Setări</a></header>
+<form id="f">
+  <label>Tip<select name="property_type">
+    <option value="apartment">Apartamente</option><option value="house">Case / vile</option>
+    <option value="land">Terenuri</option><option value="commercial">Spații comerciale</option><option value="">Toate</option>
+  </select></label>
+  <label>Tranzacție<select name="transaction_type"><option value="sale">Vânzare</option><option value="rent">Închiriere</option></select></label>
+  <label>Vânzător<select name="seller_type">
+    <option value="private">Doar proprietari</option><option value="">Toți</option><option value="agency">Doar agenții</option>
+  </select></label>
+  <label>Localitate<input name="locality" placeholder="ex: Alba Iulia, Sebeș"></label>
+  <label>Camere<select name="rooms"><option value="">Oricâte</option><option>1</option><option>2</option><option>3</option><option value="4">4+</option></select></label>
+  <label>Preț maxim (€)<input name="max_price" type="number" placeholder="ex: 90000"></label>
+  <label>Caută în text<input name="q" placeholder="ex: Cetate, centrală"></label>
+  <label>Sortare<select name="sort"><option value="new">Cele mai noi</option><option value="price_asc">Preț crescător</option><option value="ppm_asc">€/m² crescător</option></select></label>
+  <button type="submit">Caută</button>
+</form>
+<div id="status"></div>
+<div id="results"></div>
+<script src="common.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

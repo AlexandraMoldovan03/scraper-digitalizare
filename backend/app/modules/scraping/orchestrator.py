@@ -57,6 +57,7 @@ def _get_max_pages(source_key: str) -> int:
         "imobiliare_ro": settings.scrape_imobiliare_ro_max_pages,
         "romimo": settings.scrape_romimo_max_pages,
         "storia": settings.scrape_storia_max_pages,
+        "olx": settings.scrape_olx_max_pages,
     }
     return mapping.get(source_key, _DEFAULT_MAX_PAGES)
 
@@ -206,25 +207,47 @@ def _run_scrape_job_sync(job_id: int) -> None:
                     "Activate it before running jobs."
                 )
 
-            # ── 5. Scraping ───────────────────────────────────────────────────
+            # ── 5+6. Scraping + import pe loturi ──────────────────────────────
+            # Fiecare lot (de regulă o pagină de rezultate) e salvat imediat,
+            # astfel anunțurile apar în aplicație în timp ce job-ul rulează.
             max_pages = _get_max_pages(source_key)
             logger.info("Job %s: starting %s scrape (max_pages=%d)", job_id, source_key, max_pages)
-            listings = adapter.scrape_all(max_pages=max_pages)
 
-            job.listings_found = len(listings)
-            job.pages_processed = 1  # adaptorii simpli nu raportează pagini separat
-            session.add(job)
-            session.commit()
+            counters = {
+                "listings_created": 0,
+                "listings_updated": 0,
+                "listings_unchanged": 0,
+                "listings_failed": 0,
+                "warnings_count": 0,
+                "seen_external_ids": set(),
+                "seen_urls": set(),
+            }
+            batches = 0
+            for batch in adapter.iter_batches(max_pages=max_pages):
+                batches += 1
+                if not batch:
+                    continue
+                part = _import_listings(session, batch, source.id, source_key, job_id=job.id)
+                for key in ("listings_created", "listings_updated", "listings_unchanged",
+                            "listings_failed", "warnings_count"):
+                    counters[key] += part[key]
+                counters["seen_external_ids"] |= part["seen_external_ids"]
+                counters["seen_urls"] |= part["seen_urls"]
 
-            # ── 6. Import în DB ───────────────────────────────────────────────
-            counters = _import_listings(session, listings, source.id, source_key, job_id=job.id)
-
-            job.listings_created = counters["listings_created"]
-            job.listings_updated = counters["listings_updated"]
-            job.listings_unchanged = counters["listings_unchanged"]
-            job.listings_failed = counters["listings_failed"]
-            job.warnings_count = counters["warnings_count"]
-            job.listings_inserted = counters["listings_created"]  # legacy
+                job.listings_found += len(batch)
+                job.pages_processed = batches
+                job.listings_created = counters["listings_created"]
+                job.listings_updated = counters["listings_updated"]
+                job.listings_unchanged = counters["listings_unchanged"]
+                job.listings_failed = counters["listings_failed"]
+                job.warnings_count = counters["warnings_count"]
+                job.listings_inserted = counters["listings_created"]  # legacy
+                session.add(job)
+                session.commit()
+                logger.info(
+                    "Job %s: lot %d salvat (%d anunțuri, total %d)",
+                    job_id, batches, len(batch), job.listings_found,
+                )
 
             # ── 7. Mark inactive ──────────────────────────────────────────────
             try:

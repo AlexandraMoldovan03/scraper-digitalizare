@@ -11,6 +11,7 @@ from app.modules.scraping.adapters.publi24 import Publi24Adapter
 from app.modules.scraping.adapters.imobiliare_ro import ImobiliareRoAdapter
 from app.modules.scraping.adapters.romimo import RomimoAdapter
 from app.modules.scraping.adapters.storia import StoriaAdapter
+from app.modules.scraping.adapters.olx import OlxAdapter
 
 # ── Registry ───────────────────────────────────────────────────────────────────
 
@@ -19,6 +20,7 @@ SOURCE_ADAPTERS: dict[str, type[SourceAdapter]] = {
     "imobiliare_ro": ImobiliareRoAdapter,
     "romimo": RomimoAdapter,
     "storia": StoriaAdapter,
+    "olx": OlxAdapter,
 }
 
 

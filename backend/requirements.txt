@@ -1,6 +1,6 @@
 fastapi
 uvicorn[standard]
-sqlmodel
+sqlmodel>=0.0.21,<0.0.40
 sqlalchemy
 psycopg2-binary
 pydantic-settings

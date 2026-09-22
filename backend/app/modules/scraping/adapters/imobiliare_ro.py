@@ -45,6 +45,18 @@ ALBA_CATEGORIES = [
     ("commercial","sale", "vanzare-spatii-comerciale/judet-alba"),
 ]
 
+# Structura actuală a site-ului (2026): /{vanzare|inchiriere}-{categorie}/judetul-alba?page=N
+# Pagina de rezultate conține toate anunțurile în JSON (<div id="app" data-page="...">),
+# deci nu mai e nevoie de câte o cerere pentru fiecare anunț.
+INERTIA_CATEGORIES = [
+    ("apartment",  "sale", "vanzare-apartamente/judetul-alba"),
+    ("house",      "sale", "vanzare-case-vile/judetul-alba"),
+    ("land",       "sale", "vanzare-terenuri/judetul-alba"),
+    ("commercial", "sale", "vanzare-spatii-comerciale/judetul-alba"),
+    ("apartment",  "rent", "inchiriere-apartamente/judetul-alba"),
+    ("house",      "rent", "inchiriere-case-vile/judetul-alba"),
+]
+
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -875,11 +887,213 @@ class ImobiliareRoAdapter(SourceAdapter):
 
         return listing
 
+    # ── Pagina de rezultate cu JSON (structura 2026) ──────────────────────────
+
+    @staticmethod
+    def _inertia_page(html: str) -> dict | None:
+        soup = BeautifulSoup(html, "html.parser")
+        node = soup.find(id="app") or soup.find(attrs={"data-page": True})
+        raw = node.get("data-page") if node else None
+        if not raw:
+            return None
+        try:
+            return json.loads(raw)
+        except (TypeError, ValueError):
+            return None
+
+    @staticmethod
+    def _num(text) -> float | None:
+        if text is None:
+            return None
+        if isinstance(text, (int, float)):
+            return float(text)
+        m = re.search(r"\d[\d.,\s]*", str(text))
+        if not m:
+            return None
+        tok = re.sub(r"\s", "", m.group(0)).rstrip(".,")
+        # „52.000” / „1.250.000” → mii; „43,5” → zecimale
+        if re.fullmatch(r"\d{1,3}([.,]\d{3})+", tok):
+            tok = re.sub(r"[.,]", "", tok)
+        else:
+            tok = tok.replace(".", "").replace(",", ".")
+        try:
+            return float(tok)
+        except ValueError:
+            return None
+
+    @staticmethod
+    def _seller_from(raw: str | None) -> str:
+        v = (raw or "").lower()
+        if any(k in v for k in ("owner", "private", "proprietar", "particular", "person")):
+            return "private"
+        if "develop" in v or "dezvolt" in v:
+            return "developer"
+        if v:
+            return "agency"
+        return "unknown"
+
+    def listings_from_result_page(
+        self, html: str, prop_type: str, trans_type: str
+    ) -> tuple[list[ScrapedListing], int | None] | None:
+        """
+        Extrage anunțurile din JSON-ul paginii de rezultate.
+        Returnează (anunțuri, ultima_pagină) sau None dacă pagina nu are acest format.
+        """
+        page = self._inertia_page(html)
+        if not page:
+            return None
+        props = page.get("props") or {}
+        section = next(
+            (s for s in props.get("sections") or [] if s.get("type") == "results-list"),
+            None,
+        )
+        if section is None:
+            return None
+        last_page = (props.get("searchMeta") or {}).get("lastPage")
+
+        out: list[ScrapedListing] = []
+        for item in (section.get("data") or {}).get("listings") or []:
+            try:
+                ext_id = str(item.get("id") or "")
+                url = item.get("url") or ""
+                if not ext_id or not url:
+                    continue
+                if url.startswith("/"):
+                    url = BASE_URL + url
+                highlights = {
+                    str(h.get("key") or ""): str(h.get("label") or "")
+                    for h in item.get("highlights") or []
+                }
+
+                def hl(*needles: str, exclude: str = "") -> str | None:
+                    for k, v in highlights.items():
+                        if any(n in k for n in needles) and not (exclude and exclude in k):
+                            return v
+                    return None
+
+                ga = ((item.get("tracking") or {}).get("ga4Item")) or {}
+                price = self._num(item.get("price"))
+                price_text = str(item.get("price") or "")
+                currency = "RON" if re.search(r"lei|ron", price_text, re.I) else "EUR"
+                if price is None and isinstance(ga.get("price"), (int, float)) and ga["price"] > 0:
+                    price = float(ga["price"])
+
+                usable = self._num(hl("usable", "built", "surface", exclude="land"))
+                land = self._num(hl("land", "teren", "lot"))
+                if prop_type == "land" and land is None:
+                    land = usable
+                rooms_val = self._num(hl("bedroom", "room"))
+                year = self._num(hl("year"))
+
+                location = str(item.get("location") or "")
+                parts = [p.strip() for p in location.split(",") if p.strip()]
+                city = parts[-1] if parts else None
+                zone = ", ".join(parts[:-1]) if len(parts) > 1 else None
+
+                title = item.get("title") or item.get("heading") or ""
+                images = [i.get("src") for i in item.get("images") or [] if i.get("src")]
+                warnings: list[str] = []
+                quality = "valid"
+                if price is None:
+                    warnings.append("pret_lipsa")
+                    quality = "warning"
+                surface = land if prop_type == "land" else usable
+                if surface is None:
+                    warnings.append("suprafata_lipsa")
+                    quality = "warning"
+
+                out.append(ScrapedListing(
+                    title=title,
+                    url=url,
+                    description=item.get("descriptionPreview"),
+                    price_eur=price if currency == "EUR" else None,
+                    rooms=int(rooms_val) if rooms_val and prop_type in ("apartment", "house") else None,
+                    surface_m2=surface,
+                    location_raw=city,
+                    image_urls=images,
+                    data_quality=quality,
+                    quality_warnings=warnings,
+                    zone_raw=zone,
+                    external_id=ext_id,
+                    canonical_url=url,
+                    original_price=price,
+                    original_currency=currency,
+                    property_type=prop_type,
+                    transaction_type=trans_type,
+                    seller_type=self._seller_from(ga.get("sellerType")),
+                    agency_name=item.get("agencyName"),
+                    seller_type_source="ga4_seller_type",
+                    county_raw="Alba",
+                    usable_surface_m2=usable,
+                    land_surface_m2=land,
+                    construction_year=int(year) if year and 1800 < year < 2100 else None,
+                    image_count=item.get("mediaCount"),
+                    main_image_url=images[0] if images else None,
+                ))
+            except Exception as exc:  # un anunț stricat nu oprește pagina
+                logger.warning("imobiliare.ro: anunț ignorat (%s)", exc)
+        return out, (int(last_page) if last_page else None)
+
+    def iter_batches(self, max_pages: int = 20):
+        """
+        Livrează câte o pagină de rezultate. Folosește JSON-ul din pagina de
+        rezultate (rapid, fără cereri per anunț); dacă site-ul revine la vechiul
+        format, cade pe fluxul clasic (scrape_all_legacy) pentru acea rulare.
+        """
+        if not settings.scrape_imobiliare_ro_enabled:
+            raise ImobiliareRoNotAuthorizedError(
+                "SCRAPE_IMOBILIARE_RO_ENABLED=false. Setează în .env pentru a activa."
+            )
+        if not settings.scrape_imobiliare_ro_authorized:
+            raise ImobiliareRoNotAuthorizedError(
+                "SCRAPE_IMOBILIARE_RO_AUTHORIZED=false. Setează în .env pentru a activa."
+            )
+
+        legacy_needed = False
+        with self._make_client() as client:
+            for prop_type, trans_type, path in INERTIA_CATEGORIES:
+                seen: set[str] = set()
+                last_page: int | None = None
+                for page in range(1, max_pages + 1):
+                    if last_page is not None and page > last_page:
+                        break
+                    url = f"{BASE_URL}/{path}" + (f"?page={page}" if page > 1 else "")
+                    try:
+                        html, _ = self._fetch_with_retry(client, url)
+                    except ImobiliareRoBlockedError:
+                        raise
+                    except Exception as exc:
+                        logger.error("imobiliare.ro: eroare la %s: %s", url[:80], exc)
+                        break
+                    parsed = self.listings_from_result_page(html, prop_type, trans_type)
+                    if parsed is None:
+                        if page == 1 and trans_type == "sale":
+                            legacy_needed = True
+                        break
+                    listings, last_page = parsed
+                    fresh = [l for l in listings if l.external_id not in seen]
+                    seen.update(l.external_id for l in fresh)
+                    if not fresh:
+                        break
+                    logger.info("imobiliare.ro: %s pagina %d — %d anunțuri", path, page, len(fresh))
+                    yield fresh
+
+        if legacy_needed:
+            logger.warning("imobiliare.ro: pagina nu are JSON — folosesc fluxul vechi (mai lent)")
+            yield self.scrape_all_legacy(max_pages=max_pages)
+
     # ── Scrape all ────────────────────────────────────────────────────────────
 
     def scrape_all(self, max_pages: int = 20) -> list[ScrapedListing]:
+        """Toate anunțurile într-o listă (folosește iter_batches)."""
+        results: list[ScrapedListing] = []
+        for batch in self.iter_batches(max_pages=max_pages):
+            results.extend(batch)
+        return results
+
+    def scrape_all_legacy(self, max_pages: int = 20) -> list[ScrapedListing]:
         """
-        Punct de intrare principal.
+        Flux vechi (JSON-LD + câte o cerere pentru fiecare anunț).
         Guard: ENABLED + AUTHORIZED obligatorii.
         """
         if not settings.scrape_imobiliare_ro_enabled:

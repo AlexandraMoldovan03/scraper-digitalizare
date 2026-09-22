@@ -37,3 +37,9 @@ node_modules/
 dist/
 .DS_Store
 tmp/
+
+# Alte medii virtuale / fișiere temporare
+.venv*/
+_claude_tmp/
+*.tsbuildinfo
+backend/test_ci.db

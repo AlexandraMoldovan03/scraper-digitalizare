@@ -4,7 +4,7 @@ Revision ID: i0j1k2l3m4n5
 Revises: g8h9i0j1k2l3
 Create Date: 2026-08-06 12:00:00.000000
 
-Adaugă rândul pentru sursa Romimo în tabelul `source`.
+Adaugă rândul pentru sursa Romimo în tabelul `sources`.
 is_active=false implicit — se activează manual după prima importare verificată.
 
 NU face ALTER TABLE — schema există deja.
@@ -24,25 +24,17 @@ def upgrade() -> None:
 
     # Evita duplicate dacă migrația e rulată de două ori
     existing = conn.execute(
-        sa.text("SELECT id FROM source WHERE slug = 'romimo' LIMIT 1")
+        sa.text("SELECT id FROM sources WHERE slug = 'romimo' LIMIT 1")
     ).fetchone()
 
     if existing is None:
         conn.execute(
             sa.text("""
-                INSERT INTO source (name, slug, base_url, is_active, description, created_at, updated_at)
-                VALUES (
-                    'Romimo',
-                    'romimo',
-                    'https://www.romimo.ro',
-                    false,
-                    'Portal imobiliar Romimo.ro — anunțuri pentru județul Alba (apartamente, case, terenuri)',
-                    NOW(),
-                    NOW()
-                )
+                INSERT INTO sources (name, slug, base_url, is_active, created_at)
+                VALUES ('Romimo', 'romimo', 'https://www.romimo.ro', false, NOW())
             """)
         )
 
 
 def downgrade() -> None:
-    op.execute("DELETE FROM source WHERE slug = 'romimo'")
+    op.execute("DELETE FROM sources WHERE slug = 'romimo'")
